@@ -32,7 +32,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                # Stop and remove any existing container with the same name to avoid conflicts
+                // Stop and remove any existing container with the same name to avoid conflicts
                 sh '''
                 docker stop react_to_do_container || true
                 docker rm react_to_do_container || true
