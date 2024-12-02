@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         nodejs 'nodejs'  // Use the name configured in Global Tool Configuration
+        dockerTool 'docker'
     }
 
     stages {
