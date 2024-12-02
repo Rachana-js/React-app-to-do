@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'nodejs'  // Make sure 'nodejs' is configured in Jenkins Global Tool Configuration
+    }
+    
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Rachana-js/React-app-to-do.git'
+            }
+        }
+
+        stage('Docker Build and Tag') {
+            steps {
+                sh "docker build -t react-to-do-app:latest ."
+            }
+        }
+
+        stage('Containerization') {
+            steps {
+                sh '''
+                docker stop react_to_do_container || true
+                docker rm react_to_do_container || true
+                docker run -d --name react_to_do_container -p 9000:80 react-to-do-app:latest
+                '''
+            }
+        }
+    } 
+}
