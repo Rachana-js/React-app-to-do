@@ -32,12 +32,12 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Stop and remove any existing container with the same name to avoid conflicts
+                # Stop and remove any existing container with the same name to avoid conflicts
                 sh '''
                 docker stop react_to_do_container || true
                 docker rm react_to_do_container || true
                 
-                // Run the container on port 80
+                # Run the container on port 80
                 docker run -d --name react_to_do_container -p 80:80 rachanajs/react-app-to-do:latest
                 '''
             }
